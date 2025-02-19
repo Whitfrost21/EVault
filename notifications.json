@@ -15,31 +15,6 @@
     "read": false
   },
   {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
-  {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
-  {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
-  {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
-  {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
-  {
     "name": "prajwal",
     "message": "collection started... required time:42.4619s",
     "read": true
@@ -54,11 +29,7 @@
     "message": "Hello! Your E-waste has been successfully collected and recycled in Evault.\nFollowing are your overall details:\n- Name: prajwal\n- Collected Waste: Rotor\n- Quantity: 1\n- Weight: 12.32\n- Cost: 3000.00\n\nThank you!",
     "read": true
   },
-  {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
+
   {
     "name": "prajwal",
     "message": "collection started... required time:42.4619s",
@@ -69,11 +40,7 @@
     "message": "we just evaulated quality for your waste which is :Good",
     "read": true
   },
-  {
-    "name": "System",
-    "message": "You have a new notification!",
-    "read": true
-  },
+
   {
     "name": "prajwal",
     "message": "collection started... required time:42.4619s",

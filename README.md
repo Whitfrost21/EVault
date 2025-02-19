@@ -25,7 +25,7 @@ To run this project locally, follow these steps:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/EVault.git
+git clone https://github.com/Whitfrost21/EVault.git
 cd EVault
 ```
 

@@ -10,8 +10,13 @@ EVault is an innovative e-waste management solution designed to accept and proce
   !["Add Requests"](https://github.com/Whitfrost21/EVault/blob/master/Screenshots/Reqform.jpg)
 - **Real-Time Map Integration**: Can select location on real-time map, (i used osm with leaflet.js for this).
 - **Route Calculation**: Uses GraphHopper API to trace the best routes and calculate the distance and time to the pickup location.
+  !["Map"](https://github.com/Whitfrost21/EVault/blob/master/Screenshots/map.png)
+
 - **Automatic Monitoring**: The system checks pending requests every 5 minutes to ensure smooth operation.
 - **In-App Notifications**: Notifications are sent to the users when a collection request is completed.
+
+  !["notifications"](https://github.com/Whitfrost21/EVault/blob/master/Screenshots/notifications.jpg)
+
 - **Scalability**: Designed to scale to handle increasing numbers of users and requests efficiently.
 
 ## Technologies Used

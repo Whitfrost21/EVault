@@ -25,6 +25,7 @@ EVault is an innovative e-waste management solution designed to accept and proce
 - **Fyne Framework**: GUI framework for frontend development and user interface.
 - **GraphHopper API**: For route tracing, distance, and time calculation for pickups.
 - **OSM with leaflet.js**:For real-time mapview integration.
+- **PostgresSql**:For database,storage and access.
 
 ## Installation
 

@@ -2,7 +2,7 @@
 
 EVault is an innovative e-waste management solution designed to accept and process recycling requests specifically for electronic vehicles. The system allows users to schedule waste collection requests, choose their location on a real-time map, and utilizes GraphHopper API to trace optimal routes, calculate time, and distance. The system uses Go for the backend with a Fyne-based GUI for easy user interaction.
 
-!["Evault Dashboard"](https://github.com/Whitfrost21/EVault/blob/master/Screenshots/dashboard.jpg?raw=true)
+!["Evault Dashboard"](https://github.com/Whitfrost21/EVault/blob/master/Screenshots/dashboard.jpg)
 
 ## Features
 

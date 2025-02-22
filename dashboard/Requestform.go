@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os/exec"
 	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
 	"github.com/gen2brain/beeep"
-	webview "github.com/webview/webview_go"
 )
 
 func Showrequestform(window fyne.Window) fyne.CanvasObject {
@@ -22,9 +22,39 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 	phoneEntry := widget.NewEntry()
 	wasteType := widget.NewSelect(models.Wastetypes, nil)
 	quantityEntry := widget.NewEntry()
-	// selectedCoords := widget.NewLabel("Selected Coordinates: None")
+	selectedCoords := widget.NewLabel("Selected Coordinates: None")
 
 	formSubmitButton := widget.NewButton("Submit", func() {
+
+		if nameEntry.Text == "" {
+			err := beeep.Notify("Evault", "name cannot be empty", "")
+			if err != nil {
+				log.Printf("error %v", err)
+			}
+			return
+		}
+		if len(phoneEntry.Text) != 10 {
+			err := beeep.Notify("Evault", "phone no must be 10 digits", "")
+			if err != nil {
+				log.Printf("error %v", err)
+			}
+			return
+		}
+		if wasteType.Selected == "" {
+			err := beeep.Notify("Evault", "select the waste type pls", "")
+			if err != nil {
+				log.Printf("error %v", err)
+			}
+			return
+		}
+		if quantityEntry.Text == "" || quantityEntry.Text == "0" {
+			err := beeep.Notify("Evault", "qunatity cannot be empty", "")
+			if err != nil {
+				log.Printf("error %v", err)
+			}
+			return
+		}
+
 		quantity, err := strconv.Atoi(quantityEntry.Text)
 		if err != nil {
 			log.Println("Error parsing quantity:", err)
@@ -63,24 +93,41 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 
 	})
 
-	var w webview.WebView
+	// var w webview.WebView (just ignore this thing)
 
 	openMapButton := widget.NewButton("Select Location on Map", func() {
-		if w != nil {
-			log.Print("webveiw is not empty")
-			w.Destroy()
+
+		cmd := exec.Command("firefox", "http://localhost:8081/map")
+		err := cmd.Start()
+		if err != nil {
+			log.Printf("error while opening the firefox: %v", err)
 		}
+		lat := strconv.FormatFloat(mapview.Lat, 'f', -1, 64)
+		lng := strconv.FormatFloat(mapview.Lng, 'f', -1, 64)
+		selectedCoords.SetText(fmt.Sprintf("Selected Coordinates: %s , %s", lat, lng))
 
-		w = webview.New(false)
-		w.SetTitle("Select a Location")
-		w.SetSize(800, 600, 0)
-		defer w.Destroy()
-		w.Navigate("http://localhost:8081/map")
+		//this was my old configuration i used webveiw_go framework but it was causing some issues while running so i decided to use a straitforward way instead
+		// Check if there is an existing instance, and safely terminate and destroy it
+		// if w != nil {
+		// 	r := webview.New(false)
+		// 	r.Navigate("http://localhost:8081/map") // Set w to nil after destroying to avoid using an invalid instance
+		// 	r.Run()
+		// 	defer r.Destroy()
+		// }
 
-		w.Run()
-		// lat := strconv.FormatFloat(mapview.Lat, 'f', -1, 64)
-		// lng := strconv.FormatFloat(mapview.Lng, 'f', -1, 64)
-		// selectedCoords.SetText(fmt.Sprintf("Selected Coordinates: %s , %s", lat, lng))
+		// Create a new instance
+		// if w == nil {
+		// 	w = webview.New(false)
+		// 	w.SetTitle("Select a Location")
+		// 	w.SetSize(800, 600, 0)
+
+		// Safely run the new instance
+		// 	go func() {
+		// 		w.Navigate("http://localhost:8081/map")
+		// 		w.Run()
+		// 		defer w.Destroy()
+		// 	}()
+		// }
 	})
 
 	form := widget.NewForm(
@@ -90,7 +137,6 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		widget.NewFormItem("Quantity", quantityEntry),
 		widget.NewFormItem("", openMapButton),
 	)
-
 	return container.NewVBox(
 		widget.NewLabelWithStyle("Add New Request", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		form,

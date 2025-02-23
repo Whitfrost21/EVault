@@ -41,4 +41,5 @@ var Wastetypes = []string{
 	"Wiring Harnesses",
 	"Electronic Modules",
 	"Dashboard Components",
+	"Other",
 }

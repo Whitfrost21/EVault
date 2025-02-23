@@ -21,6 +21,8 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 	nameEntry := widget.NewEntry()
 	phoneEntry := widget.NewEntry()
 	wasteType := widget.NewSelect(models.Wastetypes, nil)
+	description := widget.NewEntry()
+	description.SetPlaceHolder("(Optional:only is wastetype is other)")
 	quantityEntry := widget.NewEntry()
 	selectedCoords := widget.NewLabel("Selected Coordinates: None")
 
@@ -134,6 +136,7 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		widget.NewFormItem("Name", nameEntry),
 		widget.NewFormItem("Phone No.", phoneEntry),
 		widget.NewFormItem("Waste Type", wasteType),
+		widget.NewFormItem("Description", description),
 		widget.NewFormItem("Quantity", quantityEntry),
 		widget.NewFormItem("", openMapButton),
 	)

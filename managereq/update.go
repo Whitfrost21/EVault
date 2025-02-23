@@ -1,10 +1,15 @@
 package managereq
 
 import (
+	"Source/dashboard/mapview"
+	"Source/models"
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
+	"os/exec"
+	"strconv"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -25,33 +30,49 @@ func CreateUpdateForm(window fyne.Window) fyne.CanvasObject {
 				return
 			}
 			nameEntry := widget.NewEntry()
-			addressEntry := widget.NewEntry()
 			phoneEntry := widget.NewEntry()
-			wasteTypeSelect := widget.NewSelect([]string{"Rotor", "Batteries", "Lithium Cells"}, nil)
+			wasteTypeSelect := widget.NewSelect(models.Wastetypes, nil)
+			description := widget.NewEntry()
+			description.SetPlaceHolder("(Optional:if wastetype is other)")
 			quantityEntry := widget.NewEntry()
+			openMapButton := widget.NewButton("Select Location on Map", func() {
 
+				cmd := exec.Command("firefox", "http://localhost:8081/map")
+				err := cmd.Start()
+				if err != nil {
+					log.Printf("error while opening the firefox: %v", err)
+				}
+			})
 			form := widget.NewForm(
 				widget.NewFormItem("Name", nameEntry),
-				widget.NewFormItem("Address", addressEntry),
 				widget.NewFormItem("Phone No.", phoneEntry),
 				widget.NewFormItem("Waste Type", wasteTypeSelect),
+				widget.NewFormItem("Description", description),
+				widget.NewFormItem("", openMapButton),
 				widget.NewFormItem("Quantity", quantityEntry),
 			)
 
 			// Handle form submission
 			form.OnSubmit = func() {
 				// Ensure all fields are filled
-				if idEntry.Text == "" || nameEntry.Text == "" || addressEntry.Text == "" || phoneEntry.Text == "" || wasteTypeSelect.Selected == "" || quantityEntry.Text == "" {
+				if idEntry.Text == "" || nameEntry.Text == "" || phoneEntry.Text == "" || wasteTypeSelect.Selected == "" || quantityEntry.Text == "" {
 					dialog.ShowInformation("Error", "All fields are required!", window)
 					return
 				}
+				quantity, err := strconv.Atoi(quantityEntry.Text)
+				if err != nil {
+					log.Printf("error while converting quantity to int %v", err)
+					return
+				}
 
-				data := map[string]interface{}{
-					"Name":      nameEntry.Text,
-					"Address":   addressEntry.Text,
-					"PhoneNo":   phoneEntry.Text,
-					"WasteType": wasteTypeSelect.Selected,
-					"Quantity":  quantityEntry.Text,
+				data := models.Sendreq{
+					Name:        nameEntry.Text,
+					Latitude:    mapview.Lat,
+					Longitude:   mapview.Lng,
+					Phone:       phoneEntry.Text,
+					Description: description.Text,
+					Wastetype:   wasteTypeSelect.Selected,
+					Quantity:    quantity,
 				}
 				jsonData, err := json.Marshal(data)
 				if err != nil {

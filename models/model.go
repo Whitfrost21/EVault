@@ -1,5 +1,7 @@
 package models
 
+var LogStatus = false
+
 type Sendreq struct {
 	Name        string  `json:"name"`
 	Latitude    float64 `json:"latitude"`

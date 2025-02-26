@@ -4,7 +4,9 @@ import (
 	"Source/dashboard"
 	"Source/dashboard/mapview"
 	Source "Source/evault"
+	"Source/login"
 	"Source/managereq"
+
 	"Source/notifymesg"
 	"Source/settings"
 
@@ -89,8 +91,8 @@ func main() {
 	mainContent := container.NewHSplit(sideMenu, scrollablecontent)
 	mainContent.SetOffset(0.2)
 
-	myWindow.SetContent(container.NewBorder(navbar, nil, nil, nil, mainContent))
-
+	page := login.CreateLoginPage(myWindow, navbar, mainContent)
+	myWindow.SetContent(page)
 	myWindow.Resize(fyne.NewSize(1200, 600))
 
 	myWindow.ShowAndRun()

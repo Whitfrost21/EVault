@@ -62,7 +62,7 @@ Start the EVault server with the following command:
 go run main.go
 ```
 
-> 🔔 **Note:** I have'nt define any quality determination and cost evaluation method just them manually ,may be thinking to improve them in future .
+> 🔔 **Note:** I have'nt define any quality determination and cost evaluation method just them manually ,may be thinking to improve them in future.also i dont add any user authentication while login
 
 ## Contributing
 

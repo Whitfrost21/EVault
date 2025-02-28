@@ -54,7 +54,35 @@ Sign up for a GraphHopper account to obtain an API key. Then, set the API key as
 export GRAPHHOPPER_API_KEY="your_api_key"
 ```
 
-### 4. Run the Application
+### 4. Set up PostgresSql
+
+Install postgresql
+
+```bash
+sudo pacman -S postgresql
+```
+
+Start the PostgresSql server
+
+```bash
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
+
+create database
+
+```bash
+sudo -u postgres psql
+CREATE DATABASE evault_database;
+```
+
+verify database
+
+```
+    \l
+```
+
+### 5. Run the Application
 
 Start the EVault server with the following command:
 

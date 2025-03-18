@@ -2,6 +2,7 @@ package dashboard
 
 import (
 	"fmt"
+	"image/color"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -13,16 +14,16 @@ import (
 
 func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 
-	titleLabel := widget.NewLabel("Evault Dashboard")
+	titleLabel := canvas.NewText("Evault Dashboard", color.White)
 	titleLabel.TextStyle = fyne.TextStyle{Bold: true}
 
 	// Motivational message
-	motivationLabel := widget.NewLabel("Recycle your e-waste and save the planet!")
+	motivationLabel := canvas.NewText("Recycle your e-waste and save the planet!", color.White)
 	motivationLabel.Alignment = fyne.TextAlignCenter
 
 	chartContainer := container.New(
 		layout.NewVBoxLayout(),
-		container.New(layout.NewHBoxLayout(), widget.NewLabel("Collect Your E-waste Now")),
+		container.New(layout.NewHBoxLayout(), canvas.NewText("Collect Your E-waste Now", color.White)),
 	)
 
 	separator := widget.NewSeparator()

@@ -1,8 +1,6 @@
 package managereq
 
 import (
-	"Source/dashboard/mapview"
-	"Source/models"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -15,6 +13,8 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
+	"github.com/Whitfrost21/EVault/dashboard/mapview"
+	"github.com/Whitfrost21/EVault/models"
 )
 
 func CreateUpdateForm(window fyne.Window) fyne.CanvasObject {

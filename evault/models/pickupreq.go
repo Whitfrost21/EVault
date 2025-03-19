@@ -11,6 +11,7 @@ type Locations struct {
 type Pickuprequest struct {
 	Id          uint    `gorm:"primaryKey"`
 	Name        string  `json:"name"`
+	Address     string  `json:"address"`
 	Latitude    float64 `json:"latitude"`
 	Longitude   float64 `json:"longitude"`
 	Wastetype   string  `json:"wastetype"`
@@ -36,6 +37,7 @@ type Collectedrequests struct {
 	Name        string    `json:"name"`
 	Latitude    float64   `json:"latitude"`
 	Longitude   float64   `json:"longitude"`
+	Address     string    `json:"address"`
 	Wastetype   string    `json:"wastetype"`
 	Description string    `json:"description"`
 	Phone       string    `gorm:"size:10;not null" json:"phone"`
@@ -53,6 +55,7 @@ type History struct {
 	Name        string    `json:"name"`
 	Latitude    float64   `json:"latitude"`
 	Longitude   float64   `json:"longitude"`
+	Address     string    `json:"address"`
 	Wastetype   string    `json:"wastetype"`
 	Description string    `json:"description"`
 	Phone       string    `gorm:"size:10;not null" json:"phone"`

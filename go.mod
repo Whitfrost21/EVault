@@ -1,4 +1,4 @@
-module Source
+module github.com/Whitfrost21/EVault
 
 go 1.23
 
@@ -7,7 +7,6 @@ require (
 	github.com/gen2brain/beeep v0.0.0-20240516210008-9c006672e7f4
 	github.com/gin-gonic/gin v1.10.0
 	github.com/rs/cors v1.11.1
-	github.com/webview/webview_go v0.0.0-20240831120633-6173450d4dd6
 	golang.org/x/net v0.25.0
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.25.12

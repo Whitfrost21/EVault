@@ -1,27 +1,25 @@
 package main
 
 import (
-	"Source/dashboard"
-	"Source/dashboard/mapview"
-	Source "Source/evault"
-	"Source/login"
-	"Source/managereq"
-
-	"Source/notifymesg"
-	"Source/settings"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"github.com/Whitfrost21/EVault/dashboard"
+	"github.com/Whitfrost21/EVault/dashboard/mapview"
+	"github.com/Whitfrost21/EVault/evault"
+	"github.com/Whitfrost21/EVault/login"
+	"github.com/Whitfrost21/EVault/managereq"
+	"github.com/Whitfrost21/EVault/notifymesg"
+	"github.com/Whitfrost21/EVault/settings"
 )
 
 var notifiybut fyne.Widget
 
 func main() {
 
-	go Source.StartBackend()
+	go evault.StartBackend()
 	myApp := app.New()
 	myWindow := myApp.NewWindow("Evault")
 	dashboardContent := dashboard.CreateDashboard(myWindow)

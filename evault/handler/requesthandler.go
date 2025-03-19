@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"Source/evault/models"
 	"log"
 	"net/http"
 	"strconv"
 	"strings"
 
+	"github.com/Whitfrost21/EVault/evault/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -85,6 +85,7 @@ func Updaterequest(c *gin.Context) {
 
 	var update struct {
 		Name        string  `json:"name"`
+		Address     string  `json:"address"`
 		Latitude    float64 `json:"latitude"`
 		Longitude   float64 `json:"longitude"`
 		Wastetype   string  `json:"wastetype"`

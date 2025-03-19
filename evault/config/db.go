@@ -1,10 +1,10 @@
 package config
 
 import (
-	"Source/evault/models"
 	"log"
 	"time"
 
+	"github.com/Whitfrost21/EVault/evault/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

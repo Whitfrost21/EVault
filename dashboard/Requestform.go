@@ -1,8 +1,6 @@
 package dashboard
 
 import (
-	"Source/dashboard/mapview"
-	"Source/models"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -14,6 +12,9 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+
+	"github.com/Whitfrost21/EVault/dashboard/mapview"
+	"github.com/Whitfrost21/EVault/models"
 	"github.com/gen2brain/beeep"
 )
 
@@ -61,9 +62,15 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		if err != nil {
 			log.Println("Error parsing quantity:", err)
 		}
+		//call the parseaddress here....
+		address, err := GetAddress(mapview.Lat, mapview.Lng)
+		if err != nil {
+			log.Println("error while finding the address from lat/long:", err)
+		}
 
 		data := models.Sendreq{
 			Name:      nameEntry.Text,
+			Address:   address,
 			Latitude:  mapview.Lat,
 			Longitude: mapview.Lng,
 			Phone:     phoneEntry.Text,

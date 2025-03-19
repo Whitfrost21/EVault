@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"Source/evault/models"
 	"context"
 	"encoding/json"
 	"errors"
@@ -11,6 +10,7 @@ import (
 
 	"time"
 
+	"github.com/Whitfrost21/EVault/evault/models"
 	"gorm.io/gorm"
 )
 
@@ -66,7 +66,7 @@ func Getrouteinfo(lat1, lon1, lat2, lon2 float64) (float64, float64, error) {
 	// 	log.Println("error while loading godotenv")
 	// }
 	// apikey := os.Getenv("API_KEY")
-	apikey := "" //your api key here
+	apikey := " "
 	url := fmt.Sprintf("https://graphhopper.com/api/1/route?point=%f,%f&point=%f,%f&vehicle=car&locale=en&key=%s", lat1, lon1, lat2, lon2, apikey)
 	resp, err := client.Get(url)
 	if err != nil {

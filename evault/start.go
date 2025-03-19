@@ -1,10 +1,10 @@
-package Source
+package evault
 
 import (
-	"Source/evault/config"
-	"Source/evault/handler"
 	"context"
 
+	"github.com/Whitfrost21/EVault/evault/config"
+	"github.com/Whitfrost21/EVault/evault/handler"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,14 +1,14 @@
 package handler
 
 import (
-	"Source/evault/models"
-	"Source/notifymesg"
 	"context"
 	"errors"
 	"fmt"
 	"log"
 	"time"
 
+	"github.com/Whitfrost21/EVault/evault/models"
+	"github.com/Whitfrost21/EVault/notifymesg"
 	"github.com/gen2brain/beeep"
 	"gorm.io/gorm"
 )
@@ -115,6 +115,7 @@ func Movetohistory(nextrequest models.Collectedrequests) error {
 	}
 	collected := models.History{
 		Name:        nextrequest.Name,
+		Address:     nextrequest.Address,
 		Latitude:    nextrequest.Latitude,
 		Longitude:   nextrequest.Longitude,
 		Wastetype:   nextrequest.Wastetype,

@@ -15,6 +15,7 @@ import (
 type Pickuprequest struct {
 	Id          int     `json:"id"`
 	Name        string  `json:"name"`
+	Address     string  `json:"address"`
 	Latitude    float64 `json:"latitude"`
 	Longitude   float64 `json:"longitude"`
 	WasteType   string  `json:"wastetype"`
@@ -53,7 +54,7 @@ func Fetchpending(url string) ([]Pickuprequest, error) {
 // create a table and also add a scroll bar to it
 func Displaypending(dynamicContent *fyne.Container, requests []Pickuprequest) {
 
-	headers := []string{"ID", "Name", "Latitude", "Longitude", "WasteType", "Description", "Phone", "Quantity", "Status", "priority", "Distance", "TravelTime"}
+	headers := []string{"ID", "Name", "Address", "Latitude", "Longitude", "WasteType", "Description", "Phone", "Quantity", "Status", "priority", "Distance", "TravelTime"}
 
 	// Data for the table
 	data := make([][]string, len(requests)+1)
@@ -62,6 +63,7 @@ func Displaypending(dynamicContent *fyne.Container, requests []Pickuprequest) {
 		data[i+1] = []string{
 			fmt.Sprintf("%d", req.Id),
 			req.Name,
+			req.Address,
 			fmt.Sprintf("%f", req.Latitude),
 			fmt.Sprintf("%f", req.Longitude),
 			req.WasteType,
@@ -95,16 +97,17 @@ func Displaypending(dynamicContent *fyne.Container, requests []Pickuprequest) {
 	// Set minimum size for the table to avoid collapsing
 	table.SetColumnWidth(0, 50)   // ID
 	table.SetColumnWidth(1, 200)  // Name
-	table.SetColumnWidth(2, 100)  // latitude
-	table.SetColumnWidth(3, 100)  // longitude
-	table.SetColumnWidth(4, 200)  // wastetype
-	table.SetColumnWidth(5, 300)  // description
-	table.SetColumnWidth(6, 100)  // phone
-	table.SetColumnWidth(7, 80)   // Quantity
-	table.SetColumnWidth(8, 80)   //status
-	table.SetColumnWidth(9, 100)  //priority
-	table.SetColumnWidth(10, 100) //distance
-	table.SetColumnWidth(11, 120) //travel time
+	table.SetColumnWidth(2, 300)  //Address
+	table.SetColumnWidth(3, 100)  // latitude
+	table.SetColumnWidth(4, 100)  // longitude
+	table.SetColumnWidth(5, 200)  // wastetype
+	table.SetColumnWidth(6, 300)  // description
+	table.SetColumnWidth(7, 100)  // phone
+	table.SetColumnWidth(8, 80)   // Quantity
+	table.SetColumnWidth(9, 80)   //status
+	table.SetColumnWidth(10, 100) //priority
+	table.SetColumnWidth(11, 100) //distance
+	table.SetColumnWidth(12, 120) //travel time
 
 	// Wrap the table in a scroll container
 	scroll := container.NewVScroll(table)

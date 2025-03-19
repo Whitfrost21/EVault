@@ -1,0 +1,17 @@
+[
+  {
+    "name": "prajwal",
+    "message": "collection started... required time:11.043566666s",
+    "read": true
+  },
+  {
+    "name": "prajwal",
+    "message": "we just evaulated quality for your waste which is :Good",
+    "read": false
+  },
+  {
+    "name": "prajwal",
+    "message": "Hello! Your E-waste has been successfully collected and recycled in Evault.\nFollowing are your overall details:\n- Name: prajwal\n- Collected Waste: Plastic Casings\n- Quantity: 2\n- Weight: 12.32\n- Cost: 3000.00\n\nThank you!",
+    "read": false
+  }
+]

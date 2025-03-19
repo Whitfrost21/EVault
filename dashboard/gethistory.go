@@ -15,6 +15,7 @@ import (
 type WasteRequest struct {
 	Id          int     `json:"Id"`
 	Name        string  `json:"name"`
+	Address     string  `json:"address"`
 	Latitude    float64 `json:"latitude"`
 	Longitude   float64 `json:"longitude"`
 	WasteType   string  `json:"wastetype"`
@@ -52,7 +53,7 @@ func FetchHistory(url string) ([]WasteRequest, error) {
 // create a table and also add a scroll bar to it
 func DisplayHistory(dynamicContent *fyne.Container, requests []WasteRequest) {
 
-	headers := []string{"ID", "Name", "Waste-Type", "Phone", "Quantity", "Cost", "Quality", "Completed At"}
+	headers := []string{"ID", "Name", "Address", "Waste-Type", "Phone", "Quantity", "Cost", "Quality", "Completed At"}
 
 	// Data for the table
 	data := make([][]string, len(requests)+1)
@@ -61,6 +62,7 @@ func DisplayHistory(dynamicContent *fyne.Container, requests []WasteRequest) {
 		data[i+1] = []string{
 			fmt.Sprintf("%d", req.Id),
 			req.Name,
+			req.Address,
 			req.WasteType,
 			req.Phone,
 			fmt.Sprintf("%d", req.Quantity),
@@ -90,12 +92,13 @@ func DisplayHistory(dynamicContent *fyne.Container, requests []WasteRequest) {
 	// Set minimum size for the table to avoid collapsing
 	table.SetColumnWidth(0, 50)  // ID
 	table.SetColumnWidth(1, 200) // Name
-	table.SetColumnWidth(2, 200) // Waste Type
-	table.SetColumnWidth(3, 100) // Phone
-	table.SetColumnWidth(4, 80)  // Quantity
-	table.SetColumnWidth(5, 80)  // Cost
-	table.SetColumnWidth(6, 100) // Quality
-	table.SetColumnWidth(7, 150) // Completed At
+	table.SetColumnWidth(2, 300) //Address
+	table.SetColumnWidth(3, 200) // Waste Type
+	table.SetColumnWidth(4, 100) // Phone
+	table.SetColumnWidth(5, 80)  // Quantity
+	table.SetColumnWidth(6, 80)  // Cost
+	table.SetColumnWidth(7, 100) // Quality
+	table.SetColumnWidth(8, 150) // Completed At
 
 	// Wrap the table in a scroll container
 	scroll := container.NewVScroll(table)

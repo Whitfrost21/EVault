@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"Source/evault/models"
-	"Source/notifymesg"
 	"errors"
 	"fmt"
 
@@ -10,6 +8,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/Whitfrost21/EVault/evault/models"
+	"github.com/Whitfrost21/EVault/notifymesg"
 	"github.com/gen2brain/beeep"
 	"golang.org/x/net/context"
 	"gorm.io/gorm"
@@ -114,6 +114,7 @@ func Autocomplete(ctx context.Context) {
 					}
 					collected := models.Collectedrequests{
 						Name:        nextrequest.Name,
+						Address:     nextrequest.Address,
 						Latitude:    nextrequest.Latitude,
 						Longitude:   nextrequest.Longitude,
 						Wastetype:   nextrequest.Wastetype,

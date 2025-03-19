@@ -20,7 +20,7 @@ func GetAddress(lat, long float64) (string, error) {
 	}
 
 	// Add a User-Agent header
-	req.Header.Add("User-Agent", "EVault/1.0 (pzgaming62@gmail.com)")
+	req.Header.Add("User-Agent", "EVault/1.0 (your email)")
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -28,7 +28,6 @@ func GetAddress(lat, long float64) (string, error) {
 	}
 	defer resp.Body.Close()
 
-	// Check if the response is OK
 	if resp.StatusCode != http.StatusOK {
 		return "", fmt.Errorf("Error: Received non-OK HTTP status %d", resp.StatusCode)
 	}
@@ -38,7 +37,6 @@ func GetAddress(lat, long float64) (string, error) {
 		return "", err
 	}
 
-	// Print the raw response to check for potential issues
 	// fmt.Println("Response Body: ", string(body))
 
 	var result NominatimResponse
@@ -47,7 +45,6 @@ func GetAddress(lat, long float64) (string, error) {
 		return "", err
 	}
 
-	// Check if display_name is available
 	if result.DisplayName == "" {
 		return "", fmt.Errorf("no address found for coordinates %f, %f", lat, long)
 	}

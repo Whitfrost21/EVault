@@ -3,6 +3,7 @@ package mapview
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +11,7 @@ import (
 	"sync"
 	"syscall"
 
+	"github.com/gen2brain/beeep"
 	"github.com/rs/cors"
 )
 
@@ -20,6 +22,10 @@ var (
 	started        bool
 	servermutex    sync.Mutex
 )
+
+type NominatimResponse struct {
+	DisplayName string `json:"display_name"`
+}
 
 // StartCoordinateServer starts the coordinate server and listens for incoming requests
 func StartCoordinateServer() {
@@ -50,6 +56,11 @@ func StartCoordinateServer() {
 			Lat = coords.Lat
 			Lng = coords.Lng
 			log.Printf("Received coords: lat=%.6f, lon=%.6f", Lat, Lng)
+			address := searchaddress(Lat, Lng)
+			err = beeep.Notify("EVault", fmt.Sprintf("Selected Location: %s", address), "")
+			if err != nil {
+				log.Println("error while sending beeep notification", err)
+			}
 			response := map[string]string{
 				"status":  "success",
 				"message": fmt.Sprintf("Coordinates received: Lat=%.6f, Lng=%.6f", Lat, Lng),
@@ -95,6 +106,45 @@ func StopCoordinateServer() {
 			log.Println("Coordinate server stopped.")
 		}
 	}
+}
+
+func searchaddress(lat, long float64) string {
+	url := fmt.Sprintf("https://nominatim.openstreetmap.org/reverse?lat=%f&lon=%f&format=json", lat, long)
+	fmt.Println("Requesting:", url)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		log.Println("error while searching address", err)
+	}
+
+	// Add a User-Agent header
+	req.Header.Add("User-Agent", "EVault/1.0 (your email)")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		log.Println("error while searching address", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Println("error while searching address", err)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println("error while searching address", err)
+	}
+
+	var result NominatimResponse
+	err = json.Unmarshal(body, &result)
+	if err != nil {
+		log.Println("error while marshalling json")
+	}
+
+	if result.DisplayName == "" {
+		log.Println("error no address on this coordinates")
+	}
+
+	return result.DisplayName
 }
 
 // ListenForShutdown listens for shutdown signals to gracefully stop the server

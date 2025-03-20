@@ -13,6 +13,7 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
+	"github.com/Whitfrost21/EVault/dashboard"
 	"github.com/Whitfrost21/EVault/dashboard/mapview"
 	"github.com/Whitfrost21/EVault/models"
 )
@@ -64,9 +65,14 @@ func CreateUpdateForm(window fyne.Window) fyne.CanvasObject {
 					log.Printf("error while converting quantity to int %v", err)
 					return
 				}
-
+				address, err := dashboard.GetAddress(mapview.Lat, mapview.Lng)
+				if err != nil {
+					log.Println("error while searching address:", err)
+					return
+				}
 				data := models.Sendreq{
 					Name:        nameEntry.Text,
+					Address:     address,
 					Latitude:    mapview.Lat,
 					Longitude:   mapview.Lng,
 					Phone:       phoneEntry.Text,

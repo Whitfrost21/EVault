@@ -7,17 +7,19 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
-func CreateThemeswap(app fyne.App) fyne.CanvasObject {
+var islightmode = false
 
-	islightmode := false
+func CreateThemeswap(app fyne.App) fyne.CanvasObject {
 	var togglebutton *widget.Button
-	togglebutton = widget.NewButton("light mode", func() {
+
+	togglebutton = widget.NewButton("Change Theme", func() {
 		if islightmode {
 			app.Settings().SetTheme(theme.DarkTheme())
-			togglebutton.SetText("light mode")
+
+			islightmode = true
 		} else {
 			app.Settings().SetTheme(theme.LightTheme())
-			togglebutton.SetText("dark mode")
+
 		}
 		islightmode = !islightmode
 	})

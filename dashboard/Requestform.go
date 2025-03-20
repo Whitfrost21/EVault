@@ -18,6 +18,9 @@ import (
 	"github.com/gen2brain/beeep"
 )
 
+var address string
+var Lat, Lng float64
+
 func Showrequestform(window fyne.Window) fyne.CanvasObject {
 	nameEntry := widget.NewEntry()
 	phoneEntry := widget.NewEntry()
@@ -25,7 +28,6 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 	description := widget.NewEntry()
 	description.SetPlaceHolder("(Optional:only is wastetype is other)")
 	quantityEntry := widget.NewEntry()
-	selectedCoords := widget.NewLabel("Selected Coordinates: None")
 
 	formSubmitButton := widget.NewButton("Submit", func() {
 
@@ -62,17 +64,18 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		if err != nil {
 			log.Println("Error parsing quantity:", err)
 		}
-		//call the parseaddress here....
-		address, err := GetAddress(mapview.Lat, mapview.Lng)
+		Lat = mapview.Lat
+		Lng = mapview.Lng
+		// parseaddress here....
+		address, err = GetAddress(Lat, Lng)
 		if err != nil {
 			log.Println("error while finding the address from lat/long:", err)
 		}
-
 		data := models.Sendreq{
 			Name:      nameEntry.Text,
 			Address:   address,
-			Latitude:  mapview.Lat,
-			Longitude: mapview.Lng,
+			Latitude:  Lat,
+			Longitude: Lng,
 			Phone:     phoneEntry.Text,
 			Wastetype: wasteType.Selected,
 			Quantity:  quantity,
@@ -111,9 +114,9 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		if err != nil {
 			log.Printf("error while opening the firefox: %v", err)
 		}
-		lat := strconv.FormatFloat(mapview.Lat, 'f', -1, 64)
-		lng := strconv.FormatFloat(mapview.Lng, 'f', -1, 64)
-		selectedCoords.SetText(fmt.Sprintf("Selected Coordinates: %s , %s", lat, lng))
+		// lat := strconv.FormatFloat(mapview.Lat, 'f', -1, 64)
+		// lng := strconv.FormatFloat(mapview.Lng, 'f', -1, 64)
+		// selectedCoords.SetText(fmt.Sprintf("Selected Address: %s ", address))
 
 		//this was my old configuration i used webveiw_go framework but it was causing some issues while running so i decided to use a straitforward way instead
 		// Check if there is an existing instance, and safely terminate and destroy it
@@ -137,6 +140,7 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		// 		defer w.Destroy()
 		// 	}()
 		// }
+
 	})
 
 	form := widget.NewForm(
@@ -151,6 +155,5 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		widget.NewLabelWithStyle("Add New Request", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		form,
 		formSubmitButton,
-		// selectedCoords,
 	)
 }

@@ -28,7 +28,7 @@ func main() {
 	go mapview.StartCoordinateServer()
 
 	content := container.NewVBox(dashboardContent)
-	scrollablecontent := container.NewScroll(content)
+	scrollablecontent := container.NewVScroll(content)
 	updateContent := func(newContent fyne.CanvasObject) {
 		content.Objects = []fyne.CanvasObject{newContent}
 		content.Refresh()

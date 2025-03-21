@@ -21,13 +21,31 @@ func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 	motivationLabel := canvas.NewText("Recycle your e-waste and save the planet!", color.White)
 	motivationLabel.Alignment = fyne.TextAlignCenter
 
+	data1 := []float32{1, 6, 2, 1, 4, 3, 8, 5, 3, 5, 6, 7}
+	// data2 := []float32{3, 2, 3, 5, 6, 8, 2, 4, 4, 2, 6}
+	label1 := []string{
+		"Lithium Cells", "Batteries", "Connectors", "Charging Cables",
+		"Scrap Metal", "Air Filters", "LED lights", "Wires", "Chips", "Outdated Chips", "Frames", "Plastic Trim", "Compressor"} //
+	// label2 := []string{"Plastic Casings", "Circuit Boards", " Battery Chips", "Electrolyte", "Rotor", "Stator", "Worn Brushes", "Charging ports", "Tires", "Rims", "Dashboards"}
+	//
+	// Create the bar chart with custom height scaling factor (adjust as needed)
+	chart1 := &BarChart{data: data1, labels: label1, title: "E-Waste Collection", heightFactor: 1.5}
+
+	// chart2 := &BarChart{data: data2, labels: label2, title: "E-Waste Collection", heightFactor: 1.5}
+	bar1 := CreateChart(chart1)
+	// bar2 := CreateChart(chart2)
+	// Add the chart to the container
+
 	chartContainer := container.New(
 		layout.NewVBoxLayout(),
 		container.New(layout.NewHBoxLayout(), canvas.NewText("Collect Your E-waste Now", color.White)),
 	)
-
+	bar1.Resize(fyne.NewSize(500, 500))
+	// bar2.Resize(fyne.NewSize(500, 500))
+	// barbox := container.NewMax(bar1, bar2)
+	// scrollbox := container.NewVScroll(barbox)
+	// scrollbox.Resize(fyne.NewSize(1000, 800))
 	separator := widget.NewSeparator()
-
 	dynamicContent := container.NewVBox(
 		titleLabel,
 		separator,
@@ -43,7 +61,13 @@ func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 		separator,
 		separator,
 		separator,
+		separator, separator,
 		separator,
+		separator,
+		separator,
+		separator,
+		separator,
+		separator, separator,
 	)
 
 	backgroundImage := canvas.NewImageFromFile("/home/pz/Downloads/Ev.jpg")
@@ -60,6 +84,8 @@ func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 			}
 			backgroundImage.Hide()
 			dynamicContent.Refresh()
+			bar1.Hide()
+			// bar2.Hide()
 		}),
 		widget.NewButtonWithIcon("Collected Requests", theme.FileApplicationIcon(), func() {
 			url := "http://localhost:8080/getcollectedlist"
@@ -117,6 +143,8 @@ func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 			}
 			backgroundImage.Hide()
 			DisplayWeight(dynamicContent, weight)
+			bar1.Hide()
+			// bar2.Hide()
 		}),
 	)
 
@@ -127,12 +155,11 @@ func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 		}
 	}
 
-	dashboard := container.NewBorder(
+	dashboard := container.NewVBox(
 		contentWithBackground,
 		buttons,
-		nil,
-		nil,
+		bar1,
 	)
-
+	dashboard.Resize(fyne.NewSize(800, 2000))
 	return dashboard
 }

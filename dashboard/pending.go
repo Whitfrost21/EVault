@@ -93,11 +93,10 @@ func Displaypending(dynamicContent *fyne.Container, requests []Pickuprequest) {
 			cell.(*widget.Label).SetText(data[id.Row][id.Col])
 		},
 	)
-
 	// Set minimum size for the table to avoid collapsing
 	table.SetColumnWidth(0, 50)   // ID
 	table.SetColumnWidth(1, 200)  // Name
-	table.SetColumnWidth(2, 300)  //Address
+	table.SetColumnWidth(2, 700)  //Address
 	table.SetColumnWidth(3, 100)  // latitude
 	table.SetColumnWidth(4, 100)  // longitude
 	table.SetColumnWidth(5, 200)  // wastetype

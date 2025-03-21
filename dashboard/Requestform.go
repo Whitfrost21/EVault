@@ -71,6 +71,14 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 		if err != nil {
 			log.Println("error while finding the address from lat/long:", err)
 		}
+		if address == "" {
+			err := beeep.Notify("Evault", "Address cannot be empty", "")
+			if err != nil {
+				log.Printf("error %v", err)
+			}
+			return
+		}
+
 		data := models.Sendreq{
 			Name:      nameEntry.Text,
 			Address:   address,

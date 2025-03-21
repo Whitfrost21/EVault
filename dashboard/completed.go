@@ -99,7 +99,7 @@ func Displaycompleted(dynamicContent *fyne.Container, requests []Collectedreques
 	// Set minimum size for the table to avoid collapsing
 	table.SetColumnWidth(0, 50)   // ID
 	table.SetColumnWidth(1, 200)  // Name
-	table.SetColumnWidth(2, 300)  //Address
+	table.SetColumnWidth(2, 700)  //Address
 	table.SetColumnWidth(3, 200)  // Waste Type
 	table.SetColumnWidth(4, 300)  // Description
 	table.SetColumnWidth(5, 100)  // latitude

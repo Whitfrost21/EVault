@@ -92,7 +92,7 @@ func DisplayHistory(dynamicContent *fyne.Container, requests []WasteRequest) {
 	// Set minimum size for the table to avoid collapsing
 	table.SetColumnWidth(0, 50)  // ID
 	table.SetColumnWidth(1, 200) // Name
-	table.SetColumnWidth(2, 300) //Address
+	table.SetColumnWidth(2, 700) //Address
 	table.SetColumnWidth(3, 200) // Waste Type
 	table.SetColumnWidth(4, 100) // Phone
 	table.SetColumnWidth(5, 80)  // Quantity

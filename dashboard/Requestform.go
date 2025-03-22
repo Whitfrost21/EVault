@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os/exec"
+	"regexp"
 	"strconv"
 
 	"fyne.io/fyne/v2"
@@ -38,10 +39,27 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 			}
 			return
 		}
-		if len(phoneEntry.Text) != 10 {
-			err := beeep.Notify("Evault", "phone no must be 10 digits", "")
+		regex := regexp.MustCompile(`^[0-9]+$`)
+		if phoneEntry.Text == "" {
+			err := beeep.Notify("Evault", "Phone number cannot be empty!", "")
 			if err != nil {
 				log.Printf("error %v", err)
+			}
+			return
+		}
+		if !regex.MatchString(phoneEntry.Text) {
+			err := beeep.Notify("Evault", "Phone number must be Numeric Right!", "")
+			if err != nil {
+				log.Printf("error %v", err)
+
+			}
+			return
+		}
+		if len(phoneEntry.Text) != 10 {
+			err := beeep.Notify("EVault", "Phone number must be 10 digits", "")
+			if err != nil {
+				log.Printf("error %v", err)
+
 			}
 			return
 		}
@@ -49,6 +67,7 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 			err := beeep.Notify("Evault", "select the waste type pls", "")
 			if err != nil {
 				log.Printf("error %v", err)
+
 			}
 			return
 		}
@@ -72,7 +91,7 @@ func Showrequestform(window fyne.Window) fyne.CanvasObject {
 			log.Println("error while finding the address from lat/long:", err)
 		}
 		if address == "" {
-			err := beeep.Notify("Evault", "Address cannot be empty", "")
+			err := beeep.Notify("Evault", "pls select the location", "")
 			if err != nil {
 				log.Printf("error %v", err)
 			}

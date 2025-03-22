@@ -92,8 +92,8 @@ func main() {
 	page := login.CreateLoginPage(myWindow, navbar, mainContent)
 	myWindow.SetContent(page)
 	myWindow.Resize(fyne.NewSize(1200, 600))
-
 	myWindow.ShowAndRun()
+	myWindow.Content().Refresh()
 
 	go mapview.ListenForShutdown()
 	go mapview.Listencoords()

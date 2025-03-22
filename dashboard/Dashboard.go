@@ -21,13 +21,14 @@ func CreateDashboard(window fyne.Window) fyne.CanvasObject {
 	motivationLabel := canvas.NewText("Recycle your e-waste and save the planet!", color.White)
 	motivationLabel.Alignment = fyne.TextAlignCenter
 
-	data1 := []float32{1, 6, 2, 1, 4, 3, 8, 5, 3, 5, 6, 7}
 	// data2 := []float32{3, 2, 3, 5, 6, 8, 2, 4, 4, 2, 6}
 	label1 := []string{
 		"Lithium Cells", "Batteries", "Connectors", "Charging Cables",
-		"Scrap Metal", "Air Filters", "LED lights", "Wires", "Chips", "Outdated Chips", "Frames", "Plastic Trim", "Compressor"} //
+		"Scrap Metal", "Air Filters", "LED lights", "Wires", "Tires", "Outdated Chips", "Frames", "Plastic Trim"} //
+
 	// label2 := []string{"Plastic Casings", "Circuit Boards", " Battery Chips", "Electrolyte", "Rotor", "Stator", "Worn Brushes", "Charging ports", "Tires", "Rims", "Dashboards"}
-	//
+
+	data1 := FetchBarheight(label1)
 	// Create the bar chart with custom height scaling factor (adjust as needed)
 	chart1 := &BarChart{data: data1, labels: label1, title: "E-Waste Collection", heightFactor: 1.5}
 

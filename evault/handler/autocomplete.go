@@ -94,11 +94,11 @@ func Autocomplete(ctx context.Context) {
 				defer func() { <-semaphore }()
 
 				timetocollect := time.Duration(nextrequest.TravelTime * float64(time.Second))
-				log.Println("collection started... required time:", timetocollect)
+				log.Println("Recipient:", nextrequest.Name, " collection started... required time:", timetocollect)
 				time.Sleep(timetocollect)
 				//send message via Addnotification
 				notifymesg.AddNotification(nextrequest.Name, fmt.Sprintf("collection started... required time:%s", timetocollect))
-				err := beeep.Notify("Evault", fmt.Sprintf("collection started... required time:%s", timetocollect), "")
+				err := beeep.Notify("Evault", fmt.Sprintf("Dear %s ,your E-waste collection has been started... required time:%s", nextrequest.Name, timetocollect), "")
 				if err != nil {
 					log.Printf("Failed to send notification: %v", err)
 				}

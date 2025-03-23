@@ -57,7 +57,7 @@ func Decidequality(ctx context.Context) {
 				continue
 			}
 			log.Printf("quality and cost decided for %d quality:%s cost:%.2f\n", nextrequest.Id, quality, cost)
-			notifymesg.AddNotification(nextrequest.Name, fmt.Sprintf("we just evaulated quality for your waste which is :%s", quality))
+			notifymesg.AddNotification(nextrequest.Name, fmt.Sprintf(" Dear %s we just evaulated quality for your waste which is :%s", nextrequest.Name, quality))
 			if err := SendNotification(nextrequest); err != nil {
 				log.Printf("error sending notification:%d,%v", nextrequest.Id, err)
 				continue

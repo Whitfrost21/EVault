@@ -1,17 +1,17 @@
 [
   {
-    "name": "alias",
-    "message": "collection started... required time:23.00225s",
+    "name": "sid",
+    "message": "Hello! Your E-waste has been successfully collected and recycled in Evault.\nFollowing are your overall details:\n- Name: sid\n- Collected Waste: Scrap Metal\n- Quantity: 1\n- Weight: 12.32\n- Cost: 1200.00\n\nThank you!",
     "read": true
   },
   {
-    "name": "alias",
-    "message": "we just evaulated quality for your waste which is :Good",
-    "read": false
+    "name": "sid",
+    "message": " Dear sid we just evaulated quality for your waste which is :Good",
+    "read": true
   },
   {
-    "name": "alias",
-    "message": "Hello! Your E-waste has been successfully collected and recycled in Evault.\nFollowing are your overall details:\n- Name: alias\n- Collected Waste: Lithium Cells\n- Quantity: 1\n- Weight: 12.32\n- Cost: 5000.00\n\nThank you!",
-    "read": false
+    "name": "sid",
+    "message": "collection started... required time:15.113216666s",
+    "read": true
   }
 ]

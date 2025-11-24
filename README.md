@@ -1,4 +1,4 @@
-# EVault - E-Waste Scraper and Recycling System
+# EVault - Automation System for E-Waste Scraping
 
 EVault is an innovative e-waste management solution designed to accept and process recycling requests specifically for electronic vehicles. The system allows users to schedule waste collection requests, choose their location on a real-time map, and utilizes GraphHopper API to trace optimal routes, calculate time, and distance. The system uses Go for the backend with a Fyne-based GUI for easy user interaction.
 
